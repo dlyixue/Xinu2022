@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "xinu.h": "c",
+        "kernel.h": "c",
+        "*.s": "cpp",
+        "cstdio": "c"
+    }
+}
