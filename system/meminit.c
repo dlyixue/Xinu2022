@@ -86,11 +86,11 @@ pageTable* init_pgTb(){
 	return pgTb;
 }
 
-pageDir* init_pgDir(){
-	pageDir* pgDir = get_fm();
+pageDir init_pgDir(){
+	pageDir pgDir = get_fm();
 
 	for(int i = 0; i < 1024; i++){
-		pgDir->pageTbs[i] = NULL;
+		pgDirpageTbs[i] = NULL;
 	}
 	//物理内存对应--0,1:8MB
 	for(uint32 i=0;i<2;i++){
@@ -300,7 +300,7 @@ void vminit(void) {
 		//4096 get physical page
 		for(int i = 0; i < next_block_length/PAGE_SIZE;i++){
 			int tmp = push_fm(freeblock);
-			printf("%x\n",freeblock);
+			//printf("%x\n",freeblock);
 			if(tmp == 0){
 				break;
 			}
