@@ -80,6 +80,9 @@ extern	pid32	getitem(pid32);
 
 /* in file getmem.c */
 extern	char	*getmem(uint32);
+extern pageTable* init_pgTb();
+extern pageDir* init_pgDir();
+
 
 /* in file getpid.c */
 extern	pid32	getpid(void);

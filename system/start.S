@@ -215,6 +215,8 @@ gdt1:
 	/*
 	 * Call the nulluser to initialize the system
 	 */
+	movl 	$(end + 8*1024 - 4), %esp
+	movl 	%esp, %ebp
 	call	nulluser
 	call	halt
 

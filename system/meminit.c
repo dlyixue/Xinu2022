@@ -56,6 +56,73 @@ struct sd gdt_copy[NGD] = {
 };
 extern	struct	sd gdt[];	/* Global segment table			*/
 
+uint32 freememlist[1024*1024];
+int fmid;
+
+uint32 align_page(uint32 block){
+	int temp = block - block%PAGE_SIZE;
+	temp = temp + PAGE_SIZE;
+	return temp;
+}
+
+int push_fm(int *fm){
+	fmid += 1;
+	if( fmid >= 1024*1024){
+		return 0;
+	}
+	freememlist[fmid] = fm;
+	return 1;
+}
+
+uint32 get_fm(){
+	return freememlist[fmid--];
+}
+
+pageTable* init_pgTb(){
+	pageTable* pgTb = get_fm();
+	for(int i = 0; i < 1024; i++){
+		pgTb->page[i] = NULL;
+	}
+	return pgTb;
+}
+
+pageDir* init_pgDir(){
+	pageDir* pgDir = get_fm();
+
+	for(int i = 0; i < 1024; i++){
+		pgDir->pageTbs[i] = NULL;
+	}
+	//物理内存对应--0,1:8MB
+	for(uint32 i=0;i<2;i++){
+		pgDir->pageTbs[i] = get_fm();
+		for(uint32 j=0;j<1024;j++){
+			pgDir->pageTbs[i]->page[j] = ((i << 10) + j) << 12 | PTE_P | PTE_W ;
+		}
+	}
+	return pgDir;
+}
+
+int get_vm_eg(pageDir* pgDir){
+	pageTable* pgTb;
+	int idTb;
+	int idPg;
+
+	for(int i = 4; i < 1020; i++){
+		if(pgDir->pageTbs[i] == NULL){
+			pgDir->pageTbs[i] = init_pgTb();
+		}
+		pgTb = pgDir->pageTbs[i];
+		idTb = i;
+
+		for(int j = 0; j < 1024; j++){
+			if(pgTb->page[j] == NULL){
+				idPg = j;
+				
+			}
+		}
+	}
+}
+
 /*------------------------------------------------------------------------
  * meminit - initialize memory bounds and the free memory list
  *------------------------------------------------------------------------
@@ -152,6 +219,109 @@ void	meminit(void) {
 	}
 }
 
+void vminit(void) {
+
+	struct	memblk	*memptr;	/* Ptr to memory block		*/
+	struct	mbmregion	*mmap_addr;	/* Ptr to mmap entries		*/
+	struct	mbmregion	*mmap_addrend;	/* Ptr to end of mmap region	*/
+	struct	memblk	*next_memptr;	/* Ptr to next memory block	*/
+	uint32	next_block_length;	/* Size of next memory block	*/
+
+	mmap_addr = (struct mbmregion*)NULL;
+	mmap_addrend = (struct mbmregion*)NULL;
+
+	/* Initialize the free list */
+	memptr = &memlist;
+	memptr->mnext = (struct memblk *)NULL;
+	memptr->mlength = 0;
+
+	/* Initialize the memory counters */
+	/*    Heap starts at the end of Xinu image */
+	minheap = (void*)&end;
+	maxheap = minheap;
+
+	/* Check if Xinu was loaded using the multiboot specification	*/
+	/*   and a memory map was included				*/
+	if(bootsign != MULTIBOOT_SIGNATURE) {
+		panic("could not find multiboot signature");
+	}
+	if(!(bootinfo->flags & MULTIBOOT_BOOTINFO_MMAP)) {
+		panic("no mmap found in boot info");
+	}
+
+	/* Get base address of mmap region (passed by GRUB) */
+	mmap_addr = (struct mbmregion*)bootinfo->mmap_addr;
+
+	/* Calculate address that follows the mmap block */
+	mmap_addrend = (struct mbmregion*)((uint8*)mmap_addr + bootinfo->mmap_length);
+
+	/* Read mmap blocks and initialize the Xinu free memory list	*/
+	while(mmap_addr < mmap_addrend) {
+
+		/* If block is not usable, skip to next block */
+		if(mmap_addr->type != MULTIBOOT_MMAP_TYPE_USABLE) {
+			mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
+			continue;
+		}
+
+		if((uint32)maxheap < ((uint32)mmap_addr->base_addr + (uint32)mmap_addr->length)) {
+			maxheap = (void*)((uint32)mmap_addr->base_addr + (uint32)mmap_addr->length);
+		}
+
+		/* Ignore memory blocks within the Xinu image */
+		if((mmap_addr->base_addr + mmap_addr->length) < ((uint32)minheap)) {
+			mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
+			continue;
+		}
+
+		/* The block is usable, so add it to Xinu's memory list */
+
+		/* This block straddles the end of the Xinu image */
+		if((mmap_addr->base_addr <= (uint32)minheap) &&
+		  ((mmap_addr->base_addr + mmap_addr->length) >
+		  (uint32)minheap)) {
+
+			/* This is the first free block, base address is the minheap */
+			next_memptr = (struct memblk *)roundmb(minheap);
+
+			/* Subtract Xinu image from length of block */
+			next_block_length = (uint32)truncmb(mmap_addr->base_addr + mmap_addr->length - (uint32)minheap);
+		} else {
+
+			/* Handle a free memory block other than the first one */
+			next_memptr = (struct memblk *)roundmb(mmap_addr->base_addr);
+
+			/* Initialize the length of the block */
+			next_block_length = (uint32)truncmb(mmap_addr->length);
+		}
+
+		uint32 freeblock = (uint32)next_memptr;
+		freeblock = align_page(freeblock);
+		//4096 get physical page
+		for(int i = 0; i < next_block_length/PAGE_SIZE;i++){
+			int tmp = push_fm(freeblock);
+			printf("%x\n",freeblock);
+			if(tmp == 0){
+				break;
+			}
+			freeblock += PAGE_SIZE;
+		}
+
+		/* Add then new block to the free list */
+		memptr->mnext = next_memptr;
+		memptr = memptr->mnext;
+		memptr->mlength = next_block_length;
+		memlist.mlength += next_block_length;
+
+		/* Move to the next mmap block */
+		mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
+	}
+
+	/* End of all mmap blocks, and so end of Xinu free list */
+	if(memptr) {
+		memptr->mnext = (struct memblk *)NULL;
+	}
+}
 
 /*------------------------------------------------------------------------
  * setsegs  -  Initialize the global segment table

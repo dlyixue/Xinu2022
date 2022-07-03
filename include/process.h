@@ -38,6 +38,19 @@
 
 #define NDESC		5	/* must be odd to make procent 4N bytes	*/
 
+#define PTE_P 0x001 // Present
+#define PTE_W 0x002 // Writeable
+#define PTE_U 0x004 // User
+
+typedef struct{
+	uint32 page[1024];
+}pageTable;
+
+
+typedef struct{
+	pageTable* pageTbs[1024];
+}pageDir;
+
 /* Definition of the process table (multiple of 32 bits) */
 
 struct procent {		/* Entry in the process table		*/
