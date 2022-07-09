@@ -60,7 +60,7 @@ uint32 freememlist[1024*1024];
 int fmid;
 
 uint32 align_page(uint32 block){
-	int temp = block - block%PAGE_SIZE;
+	uint32 temp = block - block%PAGE_SIZE;
 	temp = temp + PAGE_SIZE;
 	return temp;
 }
@@ -78,51 +78,29 @@ uint32 get_fm(){
 	return freememlist[fmid--];
 }
 
-pageTable* init_pgTb(){
-	pageTable* pgTb = get_fm();
-	for(int i = 0; i < 1024; i++){
-		pgTb->page[i] = NULL;
-	}
-	return pgTb;
-}
 
-pageDir init_pgDir(){
-	pageDir pgDir = get_fm();
-
-	for(int i = 0; i < 1024; i++){
-		pgDirpageTbs[i] = NULL;
-	}
+pgDir init_pgDir(){
+	pgDir pgDir = get_fm();
 	//物理内存对应--0,1:8MB
 	for(uint32 i=0;i<2;i++){
-		pgDir->pageTbs[i] = get_fm();
+		pgTb pageTable = get_fm();
+		int temp = pageTable;
+		pgDir[i] = temp | PTE_P | PTE_W;
 		for(uint32 j=0;j<1024;j++){
-			pgDir->pageTbs[i]->page[j] = ((i << 10) + j) << 12 | PTE_P | PTE_W ;
+			pageTable->page[j] = ((i << 10) + j) << 12 | PTE_P | PTE_W ;
 		}
 	}
 	return pgDir;
 }
 
-int get_vm_eg(pageDir* pgDir){
-	pageTable* pgTb;
-	int idTb;
-	int idPg;
-
-	for(int i = 4; i < 1020; i++){
-		if(pgDir->pageTbs[i] == NULL){
-			pgDir->pageTbs[i] = init_pgTb();
-		}
-		pgTb = pgDir->pageTbs[i];
-		idTb = i;
-
-		for(int j = 0; j < 1024; j++){
-			if(pgTb->page[j] == NULL){
-				idPg = j;
-				
-			}
-		}
-	}
+void set_cr3(pgDir pageDir) {
+    asm volatile (
+        "mov %0, %%cr3\n\t"
+        :
+        :"r"(pageDir)
+        :
+    );
 }
-
 /*------------------------------------------------------------------------
  * meminit - initialize memory bounds and the free memory list
  *------------------------------------------------------------------------
@@ -298,7 +276,7 @@ void vminit(void) {
 		uint32 freeblock = (uint32)next_memptr;
 		freeblock = align_page(freeblock);
 		//4096 get physical page
-		for(int i = 0; i < next_block_length/PAGE_SIZE;i++){
+		for(int i = 0; i < next_block_length/PAGE_SIZE - 1;i++){
 			int tmp = push_fm(freeblock);
 			//printf("%x\n",freeblock);
 			if(tmp == 0){

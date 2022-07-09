@@ -44,13 +44,10 @@
 
 typedef struct{
 	uint32 page[1024];
-}pageTable;
+}pgTable;
 
-
-typedef struct{
-	pageTable* pageTbs[1024];
-}pageDir;
-
+typedef pgTable **pgDir;
+typedef pgTable *pgTb;
 /* Definition of the process table (multiple of 32 bits) */
 
 struct procent {		/* Entry in the process table		*/

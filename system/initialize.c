@@ -148,7 +148,16 @@ static	void	sysinit()
 	/* Initialize free memory list */
 	
 	vminit();
-	
+	pgDir pagedir = init_pgDir();
+	set_cr3(pagedir);
+	asm volatile (
+        "mov %%cr0, %%eax\n\t"
+        "or $0x80000000, %%eax\n\t"
+        "mov %%eax, %%cr0\n\t"
+        :
+        :
+        :"eax"
+    );
 
 	/* Initialize system variables */
 
