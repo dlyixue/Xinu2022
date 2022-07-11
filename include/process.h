@@ -38,16 +38,21 @@
 
 #define NDESC		5	/* must be odd to make procent 4N bytes	*/
 
+#define PAGE_SIZE 4096
 #define PTE_P 0x001 // Present
 #define PTE_W 0x002 // Writeable
 #define PTE_U 0x004 // User
+#define PTE_kernel 0x001|0x002
+#define PTE_user 0x001|0x002|0x004
 
-typedef struct{
-	uint32 page[1024];
-}pgTable;
+typedef struct {
+    uint32 entries[1024];
+}page;
 
-typedef pgTable **pgDir;
-typedef pgTable *pgTb;
+typedef page *pgDir;
+typedef page *pgTab;
+#define Write0x1fff000(index, entry) ((struct page *)0x1fff000)->entries[index] = entry
+#define GetEntryFrom0x1fff000(index) ((struct page *)0x1fff000)->entries[index]
 /* Definition of the process table (multiple of 32 bits) */
 
 struct procent {		/* Entry in the process table		*/
@@ -63,6 +68,7 @@ struct procent {		/* Entry in the process table		*/
 	bool8	prhasmsg;	/* Nonzero iff msg is valid		*/
 	int16	prdesc[NDESC];	/* Device descriptors for process	*/
 	uint32	esp0;
+	pgDir	pageDir;
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

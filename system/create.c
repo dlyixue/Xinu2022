@@ -27,20 +27,23 @@ pid32	create(
 	uint32		*Usaddr;	/* user Stack*/
 
 	mask = disable();
+
+	pgDir phy_add = get_pgDir();
+	prcount++;
+	prptr = &proctab[pid];
+	prptr->pageDir = phy_add;
+
 	if (ssize < MINSTK)
 		ssize = MINSTK;
 	ssize = (uint32) roundmb(ssize);
+	ssize = 4*1024*1024;//固定4M
 	if ( (priority < 1) || ((pid=newpid()) == SYSERR) ||
-	     ((saddr = (uint32 *)getstk(ssize)) == (uint32 *)SYSERR) 
-		 ||((Usaddr = (uint32 *)getstk(ssize)) == (uint32 *)SYSERR) ) {
+	     ((saddr = (uint32 *)alloc_kstk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) 
+		 ||((Usaddr = (uint32 *)alloc_ustk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) ) {
 		restore(mask);
 		return SYSERR;
 	}
 	
-
-	prcount++;
-	prptr = &proctab[pid];
-
 	/* Initialize process table entry for new process */
 	prptr->prstate = PR_SUSP;	/* Initial state is suspended	*/
 	prptr->prprio = priority;
@@ -60,9 +63,13 @@ pid32	create(
 
 	/* Initialize stack as if the process was called		*/
 
+	uint32 *saddr_cp = saddr;
+	uint32 *Usaddr_cp = Usaddr;
+	saddr = (uint32 *)0x1ffeffc;
+	*Usaddr = (uint32 *)0x1ffdffc;
 	*saddr = STACKMAGIC;
 	*Usaddr = STACKMAGIC;
-	savsp = (uint32)saddr;
+	savsp = (uint32)saddr_cp;
 
 	/* Push arguments */
 	a = (uint32 *)(&nargs + 1);	/* Start of args		*/
@@ -72,19 +79,30 @@ pid32	create(
 		*tmp = *a--;
 		*--saddr = *tmp;
 		*--Usaddr = *tmp;
+		--saddr_cp;
+		--Usaddr_cp;
 	}		/* onto created process's stack	*/
+
 	*--saddr = (long)INITRET;	/* Push on return address	*/
 	*--Usaddr = (long)INITRET;
+	--saddr_cp;
+	--Usaddr_cp;
+
 	TSS.ss0 = (0x3 << 3);
-	prptr->esp0 = saddr;
+	prptr->esp0 = saddr_cp;
 	TSS.io_map = (uint16)0xffff;
 
-	uesp = (uint32)Usaddr;
+	uesp = (uint32)Usaddr_cp;
+
 	// push 中断返回堆栈
 	*--saddr = 0x33; // ss
+	--saddr_cp;
 	*--saddr = uesp; //esp
+	--saddr_cp;
 	*--saddr = 0x00000200;//eflags
+	--saddr_cp;
 	*--saddr = 0x23; //cs
+	--saddr_cp;
 	//
 	/* The following entries on the stack must match what ctxsw	*/
 	/*   expects a saved process state to contain: ret address,	*/
@@ -94,27 +112,41 @@ pid32	create(
 					/*   half-way through a call to	*/
 					/*   ctxsw that "returns" to the*/
 					/*   new process		*/
+	--saddr_cp;
 	*--saddr = 0x002a002a;
+	--saddr_cp;
 	*--saddr = 0x002a002a; // ds/gs/fs/es
+	--saddr_cp;
 	*--saddr = (long)&ret_k2u;
+	--saddr_cp;
 	*--saddr = savsp;		/* This will be register ebp	*/
 					/*   for process exit		*/
-	savsp = (uint32) saddr;		/* Start of frame for ctxsw	*/
+	--saddr_cp;
+	savsp = (uint32) saddr_cp;		/* Start of frame for ctxsw	*/
 	*--saddr = 0x00000200;		/* New process runs with	*/
+	--saddr_cp;
 					/*   interrupts enabled		*/
 
 	/* Basically, the following emulates an x86 "pushal" instruction*/
 
 	*--saddr = 0;			/* %eax */
+	--saddr_cp;
 	*--saddr = 0;			/* %ecx */
+	--saddr_cp;
 	*--saddr = 0;			/* %edx */
+	--saddr_cp;
 	*--saddr = 0;			/* %ebx */
+	--saddr_cp;
 	*--saddr = 0;			/* %esp; value filled in below	*/
+	--saddr_cp;
 	pushsp = saddr;			/* Remember this location	*/
 	*--saddr = savsp;		/* %ebp (while finishing ctxsw)	*/
+	--saddr_cp;
 	*--saddr = 0;			/* %esi */
+	--saddr_cp;
 	*--saddr = 0;			/* %edi */
-	*pushsp = (unsigned long) (prptr->prstkptr = (char *)saddr);
+	--saddr_cp;
+	*pushsp = (unsigned long) (prptr->prstkptr = (char *)saddr_cp);
 	restore(mask);
 	return pid;
 }
