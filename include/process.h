@@ -51,8 +51,8 @@ typedef struct {
 
 typedef page *pgDir;
 typedef page *pgTab;
-#define Write0x1fff000(index, entry) ((struct page *)0x1fff000)->entries[index] = entry
-#define GetEntryFrom0x1fff000(index) ((struct page *)0x1fff000)->entries[index]
+#define Write0x1fff000(index, entry) ((pgTab)0x1fff000)->entries[index] = entry
+#define GetEntryFrom0x1fff000(index) ((pgTab)0x1fff000)->entries[index]
 /* Definition of the process table (multiple of 32 bits) */
 
 struct procent {		/* Entry in the process table		*/

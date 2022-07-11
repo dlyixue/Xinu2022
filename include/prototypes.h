@@ -80,9 +80,14 @@ extern	pid32	getitem(pid32);
 
 /* in file getmem.c */
 extern	char	*getmem(uint32);
-extern pgDir init_pgDir();
-void set_cr3(pgDir);
-void set_cr0();
+extern pgDir init_pgDir(void);
+extern void set_cr3(pgDir);
+extern pgDir get_pgDir(void);
+extern char *alloc_kstk(uint32, uint32);
+extern char *alloc_ustk(uint32, uint32);
+extern void MkpgAccessibleby0x1fff000(uint32);
+extern void map_phy(uint32, int);
+extern void write_phy(int, int);
 
 
 /* in file getpid.c */

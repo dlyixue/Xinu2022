@@ -65,15 +65,14 @@ uint32 align_page(uint32 block){
 	return temp;
 }
 
-inline void MkpgAccessibleby0x1fff000(uint32 phy_add)
-{
+void MkpgAccessibleby0x1fff000(uint32 phy_add){
     intmask mask = disable();
     ((pgTab)(freememlist[2]))->entries[1023] = phy_add | PTE_P | PTE_W; // now we hope that pddr's physical page can be accessed by 0x1fff000
     update_tlb((pgTab)0x1fff000);
     restore(mask);
 }
 
-inline void map_phy(uint32 phy_add,int i){
+void map_phy(uint32 phy_add,int i){
 	intmask mask = disable();
 	if(i == 1022){
 		((pgTab)(freememlist[2]))->entries[1022] = phy_add | PTE_P | PTE_W;
@@ -86,7 +85,7 @@ inline void map_phy(uint32 phy_add,int i){
     restore(mask);
 }
 
-inline void write_phy(int i,int entry){
+void write_phy(int i,int entry){
 	if(i == 1022){
 		((pgTab)0x1ffe000)->entries[i] = entry;
 	}
