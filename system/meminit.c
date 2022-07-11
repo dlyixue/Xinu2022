@@ -135,7 +135,7 @@ pgDir init_pgDir(){
 	pgTab temp_page = freememlist[2];
 	temp_page->entries[1023] = get_fm() | PTE_kernel;//temp;
 	temp_page->entries[1022] = get_fm() | PTE_kernel;//kernel-stack;
-	temp_page->entries[1011] = get_fm() | PTE_kernel;//user-stack
+	temp_page->entries[1021] = get_fm() | PTE_kernel;//user-stack
 	int temp = temp_page;
 	pageDir->entries[7] = temp | PTE_kernel;
 	return pageDir;

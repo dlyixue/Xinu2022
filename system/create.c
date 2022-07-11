@@ -29,6 +29,10 @@ pid32	create(
 	mask = disable();
 
 	pgDir phy_add = get_pgDir();
+	if((priority < 1) || ((pid=newpid()) == SYSERR)){
+		restore(mask);
+		return SYSERR;
+	}
 	prcount++;
 	prptr = &proctab[pid];
 	prptr->pageDir = phy_add;
@@ -37,8 +41,7 @@ pid32	create(
 		ssize = MINSTK;
 	ssize = (uint32) roundmb(ssize);
 	ssize = 4*1024*1024;//固定4M
-	if ( (priority < 1) || ((pid=newpid()) == SYSERR) ||
-	     ((saddr = (uint32 *)alloc_kstk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) 
+	if (((saddr = (uint32 *)alloc_kstk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) 
 		 ||((Usaddr = (uint32 *)alloc_ustk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) ) {
 		restore(mask);
 		return SYSERR;
@@ -66,7 +69,7 @@ pid32	create(
 	uint32 *saddr_cp = saddr;
 	uint32 *Usaddr_cp = Usaddr;
 	saddr = (uint32 *)0x1ffeffc;
-	*Usaddr = (uint32 *)0x1ffdffc;
+	Usaddr = (uint32 *)0x1ffdffc;
 	*saddr = STACKMAGIC;
 	*Usaddr = STACKMAGIC;
 	savsp = (uint32)saddr_cp;
