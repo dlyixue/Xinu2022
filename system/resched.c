@@ -42,7 +42,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	TSS.esp0 = (long)ptnew->esp0;
-	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
+	ctxsw(&ptold->prstkptr, &ptnew->prstkptr,(void*)ptnew->pageDir);
 
 	/* Old process returns here when resumed */
 

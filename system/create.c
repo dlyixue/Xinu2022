@@ -77,11 +77,11 @@ pid32	create(
 	/* Push arguments */
 	a = (uint32 *)(&nargs + 1);	/* Start of args		*/
 	a += nargs -1;			/* Last argument		*/
-	uint32 *tmp;
+	uint32 tmp;
 	for ( ; nargs > 0 ; nargs--){	/* Machine dependent; copy args	*/
-		*tmp = *a--;
-		*--saddr = *tmp;
-		*--Usaddr = *tmp;
+		tmp = *a--;
+		*--saddr = tmp;
+		*--Usaddr = tmp;
 		--saddr_cp;
 		--Usaddr_cp;
 	}		/* onto created process's stack	*/
