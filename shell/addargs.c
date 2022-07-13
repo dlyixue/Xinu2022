@@ -44,13 +44,46 @@ status	addargs(
 
 	prptr = &proctab[pid];
 
+	aloc = (uint32)(0x1fff000 - prptr->prstklen + sizeof(uint32));
+	argloc = (uint32*) ((aloc + 3) & ~0x3);	/* round multiple of 4	*/
+
+	uint32 stk_pg = proctab[pid].pageDir;
+	MkpgAccessibleby0x1fff000(stk_pg); // now we hope that pgdir's physical page can be accessed by 0x1fff000
+	stk_pg = GetEntryFrom0x1fff000(1022); 
+	MkpgAccessibleby0x1fff000(stk_pg);
+	stk_pg = GetEntryFrom0x1fff000(1023);
+	MkpgAccessibleby0x1fff000(stk_pg);
+
+	uint32 *Usaddr = (uint32 *)0x1fff000;
+	int flag = 0;
+
+	for (search = (uint32 *)Usaddr;
+	     search < (uint32 *)0x2000000; search++) {
+
+		/* If found, replace with the address of the args vector*/
+
+		if (*search == (uint32)dummy) {
+			*search = (uint32)argloc;
+			flag = 1;
+			// restore(mask);
+			// return OK;
+		}
+	}
+	if(flag == 0){
+		/* Argument value not found on the stack - report an error */
+		restore(mask);
+		return SYSERR;
+	}
+
 	/* Compute lowest location in the process stack where the	*/
 	/*	args array will be stored followed by the argument	*/
 	/*	strings							*/
-	
-	aloc = (uint32) (prptr->prstkbase
-		- prptr->prstklen + sizeof(uint32));
-	argloc = (uint32*) ((aloc + 3) & ~0x3);	/* round multiple of 4	*/
+	stk_pg = proctab[pid].pageDir;
+	MkpgAccessibleby0x1fff000(stk_pg); // now we hope that pgdir's physical page can be accessed by 0x1fff000
+	stk_pg = GetEntryFrom0x1fff000(1023); 
+	MkpgAccessibleby0x1fff000(stk_pg);
+	stk_pg = GetEntryFrom0x1fff000(1023);
+	MkpgAccessibleby0x1fff000(stk_pg);
 
 	/* Compute the first location beyond args array for the strings	*/
 
@@ -72,22 +105,6 @@ status	addargs(
 
 	memcpy(aptr, tokbuf, tlen);
 
-	/* Find the second argument in process's stack */
-
-	for (search = (uint32 *)prptr->prstkptr;
-	     search < (uint32 *)prptr->prstkbase; search++) {
-
-		/* If found, replace with the address of the args vector*/
-
-		if (*search == (uint32)dummy) {
-			*search = (uint32)argloc;
-			restore(mask);
-			return OK;
-		}
-	}
-
-	/* Argument value not found on the stack - report an error */
-
 	restore(mask);
-	return SYSERR;
+	return OK;
 }

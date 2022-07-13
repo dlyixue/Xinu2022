@@ -107,7 +107,7 @@ uint32 get_fm(){
 		if((freememlist[i] & 1) == 0){
 			uint32 temp = freememlist[i];
 			freememlist[i] = freememlist[i] | 1;
-			kprintf("used physical address: 0x%x\n", (uint32)temp);
+			//kprintf("used physical address: 0x%x\n", (uint32)temp);
 			return temp;
 		}
 	}
@@ -171,7 +171,7 @@ pgDir get_pgDir(){
 char *alloc_kstk(uint32 nbytes, uint32 pgdir){
 	//use1023
     intmask mask = disable();
-    uint32 pages_needed = 1;
+    uint32 pages_needed = 8;
     MkpgAccessibleby0x1fff000(pgdir);
 
     uint32 stk_pgtb = (uint32)get_fm(); // one page table is enough for 4MB‘s stack
@@ -199,7 +199,7 @@ char *alloc_kstk(uint32 nbytes, uint32 pgdir){
 char *alloc_ustk(uint32 nbytes, uint32 pgdir){
 	//use1022
 	intmask mask = disable();
-    uint32 pages_needed = 1;
+    uint32 pages_needed = 8;
     MkpgAccessibleby0x1fff000(pgdir);
 
     uint32 stk_pgtb = (uint32)get_fm(); // one page table is enough for 4MB‘s stack
@@ -228,99 +228,7 @@ char *alloc_ustk(uint32 nbytes, uint32 pgdir){
  * meminit - initialize memory bounds and the free memory list
  *------------------------------------------------------------------------
  */
-void	meminit(void) {
-
-	struct	memblk	*memptr;	/* Ptr to memory block		*/
-	struct	mbmregion	*mmap_addr;	/* Ptr to mmap entries		*/
-	struct	mbmregion	*mmap_addrend;	/* Ptr to end of mmap region	*/
-	struct	memblk	*next_memptr;	/* Ptr to next memory block	*/
-	uint32	next_block_length;	/* Size of next memory block	*/
-
-	mmap_addr = (struct mbmregion*)NULL;
-	mmap_addrend = (struct mbmregion*)NULL;
-
-	/* Initialize the free list */
-	memptr = &memlist;
-	memptr->mnext = (struct memblk *)NULL;
-	memptr->mlength = 0;
-
-	/* Initialize the memory counters */
-	/*    Heap starts at the end of Xinu image */
-	minheap = (void*)&end;
-	maxheap = minheap;
-
-	/* Check if Xinu was loaded using the multiboot specification	*/
-	/*   and a memory map was included				*/
-	if(bootsign != MULTIBOOT_SIGNATURE) {
-		panic("could not find multiboot signature");
-	}
-	if(!(bootinfo->flags & MULTIBOOT_BOOTINFO_MMAP)) {
-		panic("no mmap found in boot info");
-	}
-
-	/* Get base address of mmap region (passed by GRUB) */
-	mmap_addr = (struct mbmregion*)bootinfo->mmap_addr;
-
-	/* Calculate address that follows the mmap block */
-	mmap_addrend = (struct mbmregion*)((uint8*)mmap_addr + bootinfo->mmap_length);
-
-	/* Read mmap blocks and initialize the Xinu free memory list	*/
-	while(mmap_addr < mmap_addrend) {
-
-		/* If block is not usable, skip to next block */
-		if(mmap_addr->type != MULTIBOOT_MMAP_TYPE_USABLE) {
-			mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
-			continue;
-		}
-
-		if((uint32)maxheap < ((uint32)mmap_addr->base_addr + (uint32)mmap_addr->length)) {
-			maxheap = (void*)((uint32)mmap_addr->base_addr + (uint32)mmap_addr->length);
-		}
-
-		/* Ignore memory blocks within the Xinu image */
-		if((mmap_addr->base_addr + mmap_addr->length) < ((uint32)minheap)) {
-			mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
-			continue;
-		}
-
-		/* The block is usable, so add it to Xinu's memory list */
-
-		/* This block straddles the end of the Xinu image */
-		if((mmap_addr->base_addr <= (uint32)minheap) &&
-		  ((mmap_addr->base_addr + mmap_addr->length) >
-		  (uint32)minheap)) {
-
-			/* This is the first free block, base address is the minheap */
-			next_memptr = (struct memblk *)roundmb(minheap);
-
-			/* Subtract Xinu image from length of block */
-			next_block_length = (uint32)truncmb(mmap_addr->base_addr + mmap_addr->length - (uint32)minheap);
-		} else {
-
-			/* Handle a free memory block other than the first one */
-			next_memptr = (struct memblk *)roundmb(mmap_addr->base_addr);
-
-			/* Initialize the length of the block */
-			next_block_length = (uint32)truncmb(mmap_addr->length);
-		}
-
-		/* Add then new block to the free list */
-		memptr->mnext = next_memptr;
-		memptr = memptr->mnext;
-		memptr->mlength = next_block_length;
-		memlist.mlength += next_block_length;
-
-		/* Move to the next mmap block */
-		mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
-	}
-
-	/* End of all mmap blocks, and so end of Xinu free list */
-	if(memptr) {
-		memptr->mnext = (struct memblk *)NULL;
-	}
-}
-
-void vminit(void) {
+void meminit(void) {
 
 	struct	memblk	*memptr;	/* Ptr to memory block		*/
 	struct	mbmregion	*mmap_addr;	/* Ptr to mmap entries		*/
@@ -406,6 +314,97 @@ void vminit(void) {
 				break;
 			}
 			freeblock += PAGE_SIZE;
+		}
+
+		/* Add then new block to the free list */
+		memptr->mnext = next_memptr;
+		memptr = memptr->mnext;
+		memptr->mlength = next_block_length;
+		memlist.mlength += next_block_length;
+
+		/* Move to the next mmap block */
+		mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
+	}
+
+	/* End of all mmap blocks, and so end of Xinu free list */
+	if(memptr) {
+		memptr->mnext = (struct memblk *)NULL;
+	}
+}
+void meminit_old(void) {
+
+	struct	memblk	*memptr;	/* Ptr to memory block		*/
+	struct	mbmregion	*mmap_addr;	/* Ptr to mmap entries		*/
+	struct	mbmregion	*mmap_addrend;	/* Ptr to end of mmap region	*/
+	struct	memblk	*next_memptr;	/* Ptr to next memory block	*/
+	uint32	next_block_length;	/* Size of next memory block	*/
+
+	mmap_addr = (struct mbmregion*)NULL;
+	mmap_addrend = (struct mbmregion*)NULL;
+
+	/* Initialize the free list */
+	memptr = &memlist;
+	memptr->mnext = (struct memblk *)NULL;
+	memptr->mlength = 0;
+
+	/* Initialize the memory counters */
+	/*    Heap starts at the end of Xinu image */
+	minheap = (void*)&end;
+	maxheap = minheap;
+
+	/* Check if Xinu was loaded using the multiboot specification	*/
+	/*   and a memory map was included				*/
+	if(bootsign != MULTIBOOT_SIGNATURE) {
+		panic("could not find multiboot signature");
+	}
+	if(!(bootinfo->flags & MULTIBOOT_BOOTINFO_MMAP)) {
+		panic("no mmap found in boot info");
+	}
+
+	/* Get base address of mmap region (passed by GRUB) */
+	mmap_addr = (struct mbmregion*)bootinfo->mmap_addr;
+
+	/* Calculate address that follows the mmap block */
+	mmap_addrend = (struct mbmregion*)((uint8*)mmap_addr + bootinfo->mmap_length);
+
+	/* Read mmap blocks and initialize the Xinu free memory list	*/
+	while(mmap_addr < mmap_addrend) {
+
+		/* If block is not usable, skip to next block */
+		if(mmap_addr->type != MULTIBOOT_MMAP_TYPE_USABLE) {
+			mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
+			continue;
+		}
+
+		if((uint32)maxheap < ((uint32)mmap_addr->base_addr + (uint32)mmap_addr->length)) {
+			maxheap = (void*)((uint32)mmap_addr->base_addr + (uint32)mmap_addr->length);
+		}
+
+		/* Ignore memory blocks within the Xinu image */
+		if((mmap_addr->base_addr + mmap_addr->length) < ((uint32)minheap)) {
+			mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);
+			continue;
+		}
+
+		/* The block is usable, so add it to Xinu's memory list */
+
+		/* This block straddles the end of the Xinu image */
+		if((mmap_addr->base_addr <= (uint32)minheap) &&
+		  ((mmap_addr->base_addr + mmap_addr->length) >
+		  (uint32)minheap)) {
+
+			/* This is the first free block, base address is the minheap */
+			next_memptr = (struct memblk *)roundmb(minheap);
+
+			/* Subtract Xinu image from length of block */
+			next_block_length = (uint32)truncmb(mmap_addr->base_addr + mmap_addr->length - (uint32)minheap);
+		} else {
+
+			/* Handle a free memory block other than the first one */
+			next_memptr = (struct memblk *)roundmb(mmap_addr->base_addr);
+
+			/* Initialize the length of the block */
+			next_block_length = (uint32)truncmb(mmap_addr->length);
 		}
 
 		/* Add then new block to the free list */

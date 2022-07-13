@@ -40,7 +40,7 @@ pid32	create(
 	if (ssize < MINSTK)
 		ssize = MINSTK;
 	ssize = (uint32) roundmb(ssize);
-	ssize = 4*1024*1024;//固定4M
+	ssize = 8*1024;//固定8192
 	if (((saddr = (uint32 *)alloc_kstk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) 
 		 ||((Usaddr = (uint32 *)alloc_ustk(ssize, prptr->pageDir)) == (uint32 *)SYSERR) ) {
 		restore(mask);
@@ -51,6 +51,7 @@ pid32	create(
 	prptr->prstate = PR_SUSP;	/* Initial state is suspended	*/
 	prptr->prprio = priority;
 	prptr->prstkbase = (char *)saddr;
+	prptr->prUstkbase = (char *)Usaddr;
 	prptr->prstklen = ssize;
 	prptr->prname[PNMLEN-1] = NULLCH;
 	for (i=0 ; i<PNMLEN-1 && (prptr->prname[i]=name[i])!=NULLCH; i++)
@@ -96,6 +97,7 @@ pid32	create(
 	TSS.io_map = (uint16)0xffff;
 
 	uesp = (uint32)Usaddr_cp;
+	prptr->prUstkptr = (char *)Usaddr_cp;
 
 	// push 中断返回堆栈
 	*--saddr = 0x33; // ss

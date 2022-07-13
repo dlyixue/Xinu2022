@@ -147,7 +147,7 @@ static	void	sysinit()
 	
 	/* Initialize free memory list */
 	
-	vminit();
+	meminit();
 	pgDir pagedir = init_pgDir();
 	set_cr3(pagedir);
 	asm volatile (
@@ -185,9 +185,12 @@ static	void	sysinit()
 	prptr->prstate = PR_CURR;
 	prptr->prprio = 0;
 	strncpy(prptr->prname, "prnull", 7);
-	prptr->prstkbase = getstk(NULLSTK);
+
+	prptr->pageDir = pagedir;
+	prptr->prstkbase = alloc_kstk(NULLSTK,pagedir);
 	prptr->prstklen = NULLSTK;
-	prptr->prstkptr = 0;
+	prptr->prstkptr = (char *)prptr->prstkbase - prptr->prstklen;
+
 	currpid = NULLPROC;
 	
 	/* Initialize semaphores */

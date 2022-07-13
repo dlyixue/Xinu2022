@@ -486,7 +486,7 @@ LOOP1:
 LOOP2:
 	cmpl $0,%esi
 	jg	POP_arg
-	
+
 	popl %gs
 	popl %fs
 	popl %es
