@@ -10,3 +10,5 @@ file xinu.elf
 //ctxsw
 // 用户态
 // addargs -> 拷贝参数
+// malloc -- 从低向高32M 以上
+// free -- kill时释放所有内存

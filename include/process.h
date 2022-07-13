@@ -39,11 +39,8 @@
 #define NDESC		5	/* must be odd to make procent 4N bytes	*/
 
 #define PAGE_SIZE 4096
-#define PTE_P 0x001 // Present
-#define PTE_W 0x002 // Writeable
-#define PTE_U 0x004 // User
-#define PTE_kernel 0x001|0x002
-#define PTE_user 0x001|0x002|0x004
+#define PTE_kernel 0x001|0x002 //内核态
+#define PTE_user 0x001|0x002|0x004 //用户态 
 
 typedef struct {
     uint32 entries[1024];
@@ -51,8 +48,9 @@ typedef struct {
 
 typedef page *pgDir;
 typedef page *pgTab;
-#define Write0x1fff000(index, entry) ((pgTab)0x1fff000)->entries[index] = entry
-#define GetEntryFrom0x1fff000(index) ((pgTab)0x1fff000)->entries[index]
+#define write_Gpage(index, entry) ((pgTab)0x1fff000)->entries[index] = entry
+#define get_Gpage(index) ((pgTab)0x1fff000)->entries[index]
+
 /* Definition of the process table (multiple of 32 bits) */
 
 struct procent {		/* Entry in the process table		*/
@@ -71,6 +69,7 @@ struct procent {		/* Entry in the process table		*/
 	pgDir	pageDir;
 	char	*prUstkptr;
 	char	*prUstkbase;
+	uint32	heap_ptr;
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

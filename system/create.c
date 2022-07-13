@@ -53,6 +53,7 @@ pid32	create(
 	prptr->prstkbase = (char *)saddr;
 	prptr->prUstkbase = (char *)Usaddr;
 	prptr->prstklen = ssize;
+	prptr->heap_ptr = 8;
 	prptr->prname[PNMLEN-1] = NULLCH;
 	for (i=0 ; i<PNMLEN-1 && (prptr->prname[i]=name[i])!=NULLCH; i++)
 		;

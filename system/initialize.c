@@ -190,6 +190,7 @@ static	void	sysinit()
 	prptr->prstkbase = alloc_kstk(NULLSTK,pagedir);
 	prptr->prstklen = NULLSTK;
 	prptr->prstkptr = (char *)prptr->prstkbase - prptr->prstklen;
+	prptr->heap_ptr = 8;
 
 	currpid = NULLPROC;
 	

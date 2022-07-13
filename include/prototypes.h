@@ -85,10 +85,12 @@ extern void set_cr3(pgDir);
 extern pgDir get_pgDir(void);
 extern char *alloc_kstk(uint32, uint32);
 extern char *alloc_ustk(uint32, uint32);
-extern void MkpgAccessibleby0x1fff000(uint32);
-extern void map_phy(uint32, int);
+extern void General_page(uint32);
 extern void write_phy(int, int);
-
+extern char *allocmem(uint32 );
+#define syscall_allocmem(...) \
+		do_generic_syscall(syscall, SYSCALL_ALLOCMEM, __VA_ARGS__)
+extern void freemempage(pgDir ,uint32 );
 
 /* in file getpid.c */
 extern	pid32	getpid(void);

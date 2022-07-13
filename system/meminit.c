@@ -65,33 +65,25 @@ uint32 align_page(uint32 block){
 	return temp;
 }
 
-void MkpgAccessibleby0x1fff000(uint32 phy_add){
+void General_page(uint32 phy_add){
     intmask mask = disable();
-    ((pgTab)(freememlist[2]))->entries[1023] = phy_add | PTE_user; // now we hope that pddr's physical page can be accessed by 0x1fff000
+    ((pgTab)(freememlist[2]))->entries[1023] = phy_add | PTE_user;
     update_tlb((pgTab)0x1fff000);
     restore(mask);
 }
 
-void map_phy(uint32 phy_add,int i){
+void kernel_page(uint32 phy_add){
 	intmask mask = disable();
-	if(i == 1022){
-		((pgTab)(freememlist[2]))->entries[1022] = phy_add | PTE_P | PTE_W;
-		update_tlb((pgTab)0x1ffe000);
-	}
-	if(i == 1021){
-		((pgTab)(freememlist[2]))->entries[1021] = phy_add | PTE_user;
-		update_tlb((pgTab)0x1ffd000);
-	}
+    ((pgTab)(freememlist[2]))->entries[1022] = phy_add | PTE_user;
+    update_tlb((pgTab)0x1ffe000);
     restore(mask);
 }
 
-void write_phy(int i,int entry){
-	if(i == 1022){
-		((pgTab)0x1ffe000)->entries[i] = entry;
-	}
-	if(i == 1021){
-		((pgTab)0x1ffd000)->entries[i] = entry;
-	}
+void user_page(uint32 phy_add){
+	intmask mask = disable();
+    ((pgTab)(freememlist[2]))->entries[1021] = phy_add | PTE_user;
+    update_tlb((pgTab)0x1ffd000);
+    restore(mask);
 }
 
 int push_fm(int fm){
@@ -160,11 +152,11 @@ void update_tlb(void* page){
 
 pgDir get_pgDir(){
 	pgDir pageDir = get_fm();
-	MkpgAccessibleby0x1fff000(pageDir);
+	General_page(pageDir);
 	for (int i = 0; i < 2; i++){
-        Write0x1fff000(i, freememlist[i] | PTE_user); // copy 0 - 32 MB
+        write_Gpage(i, freememlist[i] | PTE_user); // copy 0 - 32 MB
     }
-	Write0x1fff000(7,freememlist[2] | PTE_user);
+	write_Gpage(7,freememlist[2] | PTE_user);
 	return pageDir;
 }
 
@@ -172,56 +164,53 @@ char *alloc_kstk(uint32 nbytes, uint32 pgdir){
 	//use1023
     intmask mask = disable();
     uint32 pages_needed = 8;
-    MkpgAccessibleby0x1fff000(pgdir);
 
-    uint32 stk_pgtb = (uint32)get_fm(); // one page table is enough for 4MB‘s stack
-    MkpgAccessibleby0x1fff000(pgdir);
-    Write0x1fff000(1023, stk_pgtb | PTE_P | PTE_W); // virtual high 10 bits: 1111111111 -> 1023
-    MkpgAccessibleby0x1fff000(stk_pgtb);            // now the only stack page table page can be accessed by 0x1fff000
+    uint32 stk_pgtb = (uint32)get_fm(); //获取页表
+    General_page(pgdir);
+    write_Gpage(1023, stk_pgtb | PTE_kernel); //对应到1023页目录项
+    General_page(stk_pgtb);// 访问页表
     memset((void *)0x1fff000, 0, PAGE_SIZE);
-    uint32 stk_pg, stk_pg_one;
+    uint32 stk_pg, stk_pg_ptr;
     for (int i = 0; i < pages_needed; i++)
     {
         stk_pg = (uint32)get_fm();
         if (i == 0)
         {
-            stk_pg_one = stk_pg;
+            stk_pg_ptr = stk_pg;
         }
-        MkpgAccessibleby0x1fff000(stk_pgtb);              // now the only stack page table page can be accessed by 0x1fff000
-        Write0x1fff000(1023 - i, stk_pg | PTE_P | PTE_W); // virtual low 10 bits from 1111111111 to 0
+        General_page(stk_pgtb);//将获取的页写到页表里
+        write_Gpage(1023 - i, stk_pg | PTE_kernel);
     }
-    //MkpgAccessibleby0x1fff000(stk_pg_one); // still use temp, then we can initialize the stack by 0x1fff000 in the rest of create
-    map_phy(stk_pg_one,1022);
+	kernel_page(stk_pg_ptr);
 	restore(mask);
-    return (char *)0xfffffffc;             // 4GB - 4
+    return (char *)0xfffffffc;// 4GB - 4
 }
 
 char *alloc_ustk(uint32 nbytes, uint32 pgdir){
 	//use1022
 	intmask mask = disable();
     uint32 pages_needed = 8;
-    MkpgAccessibleby0x1fff000(pgdir);
+    General_page(pgdir);
 
-    uint32 stk_pgtb = (uint32)get_fm(); // one page table is enough for 4MB‘s stack
-    MkpgAccessibleby0x1fff000(pgdir);
-    Write0x1fff000(1022, stk_pgtb | PTE_user); // virtual high 10 bits: 1111111111 -> 1023
-    MkpgAccessibleby0x1fff000(stk_pgtb);            // now the only stack page table page can be accessed by 0x1fff000
+    uint32 stk_pgtb = (uint32)get_fm(); //获取页表
+    General_page(pgdir);
+    write_Gpage(1022, stk_pgtb | PTE_user);//对应到1022页目录项
+    General_page(stk_pgtb);//访问页表
     memset((void *)0x1fff000, 0, PAGE_SIZE);
-    uint32 stk_pg, stk_pg_one;
+    uint32 stk_pg, stk_pg_ptr;
     for (int i = 0; i < pages_needed; i++)
     {
         stk_pg = (uint32)get_fm();
         if (i == 0)
         {
-            stk_pg_one = stk_pg;
+            stk_pg_ptr = stk_pg;
         }
-        MkpgAccessibleby0x1fff000(stk_pgtb);              // now the only stack page table page can be accessed by 0x1fff000
-        Write0x1fff000(1023 - i, stk_pg | PTE_user); // virtual low 10 bits from 1111111111 to 0
+        General_page(stk_pgtb);//将获取的页写到页表里
+        write_Gpage(1023 - i, stk_pg | PTE_user); 
     }
-    //MkpgAccessibleby0x1fff000(stk_pg_one); // still use temp, then we can initialize the stack by 0x1fff000 in the rest of create
-    map_phy(stk_pg_one,1021);
+	user_page(stk_pg_ptr);
 	restore(mask);
-    return (char *)0xffbffffc;             // 4GB - 4M - 8
+    return (char *)0xffbffffc;// 4GB - 4M - 8
 }
 
 /*------------------------------------------------------------------------
@@ -423,6 +412,105 @@ void meminit_old(void) {
 	}
 }
 
+
+char *allocmem(uint32	nbytes){
+	intmask	mask;			/* Saved interrupt mask		*/
+	struct	memblk	*prev, *curr, *leftover;
+
+	mask = disable();
+	if (nbytes == 0) {
+		restore(mask);
+		return (char *)SYSERR;
+	}
+
+	nbytes = (uint32) roundmb(nbytes);	/* Use memblk multiples	*/
+	uint32 pages_needed = 4*nbytes/PAGE_SIZE + 1;
+	uint32 pageTabs_needed = 4*pages_needed/PAGE_SIZE + 1;
+
+	pgDir pageDir = proctab[currpid].pageDir;
+    General_page(pageDir);
+	int ptr_free = proctab[currpid].heap_ptr;
+	if(ptr_free == 512){
+		restore(mask);
+		return (char *)SYSERR;
+	}
+	proctab[currpid].heap_ptr = ptr_free + 1;
+
+	for(int i = 0; i< pageTabs_needed; i++){
+		pgDir pageDir = proctab[currpid].pageDir;
+    	General_page(pageDir);
+
+		uint32 pageTable = get_fm();
+		write_Gpage(i+ptr_free,pageTable | PTE_user);
+		General_page(pageTable);
+		memset((void *)0x1fff000, 0, PAGE_SIZE);
+
+		for(int j = 0; j < 1024 && j < pages_needed; j++){
+			uint32 block = get_fm();
+			write_Gpage(j,block | PTE_user);
+		}
+		pages_needed -= 1024;
+	}
+
+	char *ret =(char *)((ptr_free)<<22);
+	return ret;
+}
+
+void freemempage(pgDir pageDir,uint32 heap_ptr){
+	General_page(pageDir);
+	for(int i = 8; i < heap_ptr ; i++){
+		uint32 pageTab = get_Gpage(i);
+		General_page(pageTab);
+		for(int j = 0; j < 1024 ; j++){
+			uint32 block = get_Gpage(j);
+			if(block & 1 == 0){
+				break;
+			}
+			block = block &0xfffff001;
+			for(int k = fmid - 1; k >=3 ;k--){
+				if(block == freememlist[k]){
+					freememlist[k] = block-1;
+					break;
+				}
+			}
+		}
+	}
+	General_page(pageDir);
+	uint32 kstk_page = get_Gpage(1023);
+	for(int j = 1023; j >= 0 ; j--){
+		General_page(kstk_page);
+		uint32 block = get_Gpage(j);
+		if(block & 1 == 0){
+			break;
+		}
+		block = block &0xfffff001;
+		for(int k = fmid - 1; k >=3 ;k--){
+			if(block == freememlist[k]){
+				freememlist[k] = block-1;
+				break;
+			}
+		}
+	}
+	
+	General_page(pageDir);
+	uint32 ustk_page = get_Gpage(1022);
+	for(int j = 1023; j >= 0 ; j--){
+		General_page(ustk_page);
+		uint32 block = get_Gpage(j);
+		if(block & 1 == 0){
+			break;
+		}
+		block = block &0xfffff001;
+		for(int k = fmid - 1; k >=3 ;k--){
+			if(block == freememlist[k]){
+				freememlist[k] = block-1;
+				break;
+			}
+		}
+	}
+
+	return;
+}
 /*------------------------------------------------------------------------
  * setsegs  -  Initialize the global segment table
  *------------------------------------------------------------------------

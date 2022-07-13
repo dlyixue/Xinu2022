@@ -48,11 +48,11 @@ status	addargs(
 	argloc = (uint32*) ((aloc + 3) & ~0x3);	/* round multiple of 4	*/
 
 	uint32 stk_pg = proctab[pid].pageDir;
-	MkpgAccessibleby0x1fff000(stk_pg); // now we hope that pgdir's physical page can be accessed by 0x1fff000
-	stk_pg = GetEntryFrom0x1fff000(1022); 
-	MkpgAccessibleby0x1fff000(stk_pg);
-	stk_pg = GetEntryFrom0x1fff000(1023);
-	MkpgAccessibleby0x1fff000(stk_pg);
+	General_page(stk_pg); 
+	stk_pg = get_Gpage(1022); 
+	General_page(stk_pg);
+	stk_pg = get_Gpage(1023);
+	General_page(stk_pg);
 
 	uint32 *Usaddr = (uint32 *)0x1fff000;
 	int flag = 0;
@@ -79,11 +79,11 @@ status	addargs(
 	/*	args array will be stored followed by the argument	*/
 	/*	strings							*/
 	stk_pg = proctab[pid].pageDir;
-	MkpgAccessibleby0x1fff000(stk_pg); // now we hope that pgdir's physical page can be accessed by 0x1fff000
-	stk_pg = GetEntryFrom0x1fff000(1023); 
-	MkpgAccessibleby0x1fff000(stk_pg);
-	stk_pg = GetEntryFrom0x1fff000(1023);
-	MkpgAccessibleby0x1fff000(stk_pg);
+	General_page(stk_pg); 
+	stk_pg = get_Gpage(1023); 
+	General_page(stk_pg);
+	stk_pg = get_Gpage(1023);
+	General_page(stk_pg);
 
 	/* Compute the first location beyond args array for the strings	*/
 

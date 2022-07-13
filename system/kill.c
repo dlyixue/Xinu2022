@@ -30,6 +30,7 @@ syscall	kill(
 		close(prptr->prdesc[i]);
 	}
 	//freestk(prptr->prstkbase, prptr->prstklen);
+	freemempage(prptr->pageDir,prptr->heap_ptr);
 
 	switch (prptr->prstate) {
 	case PR_CURR:
