@@ -463,6 +463,14 @@ extern	void	xdone(void);
 /* in file yield.c */
 extern	syscall	yield(void);
 
+extern devcall kbdgetc(struct dentry *devptr);
+extern devcall vgaputc(struct dentry *devptr, char ch);
+extern devcall kbdvgainit(void);
+extern interrupt kbddisp(void);
+extern void kbdhandler(void);
+extern int get_pos();
+extern void set_pos(int);
+
 /* NETWORK BYTE ORDER CONVERSION NOT NEEDED ON A BIG-ENDIAN COMPUTER */
 #define	htons(x)  ((0xff & ((x)>>8)) | ((0xff & (x)) << 8))
 #define	htonl(x)  ((((x)>>24) & 0x000000ff) | (((x)>> 8) & 0x0000ff00) | \
