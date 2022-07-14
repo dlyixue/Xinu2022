@@ -30,8 +30,10 @@ void set_pos(int pos){
 
 
 devcall kbdvgainit(void){
-	struct dentry *devptr = (struct dentry *) &devtab[KBDVGA];
+	struct dentry *devptr = (struct dentry *) &devtab[CONSOLE];
 	set_evec(devptr->dvirq, (uint32)devptr->dvintr);
+	kbdcb.tyisem = semcreate(0);
+	kbdcb.last_c = ' ';
 	for(int row = 0; row < 24 ;row++){
 		for(int col = 0; col <80 ;col++){
 			uint16* addr = get_addr0(row,col);
@@ -68,21 +70,29 @@ void fb_erase1(){
 }
 
 void kbdhandler(void) {
-	struct dentry *devptr = (struct dentry *) &devtab[KBDVGA];
+	struct dentry *devptr = (struct dentry *) &devtab[CONSOLE];
 	int ch,pos;
+	int32	avail;
 	while ((ch = kbdgetc(devptr)) > 0){
+		kbdcb.last_c = ch;
 		pos = get_pos();
 		if(ch == TY_BACKSP){
-			if(pos > 0){
-				fb_erase1();
+			if (kbdcb.tyicursor > 0) {
+				kbdcb.tyicursor--;
+				fb_erase1(); /* 擦除前一个字符（略） */
 			}
 		}
 		else if(ch == TY_NEWLINE || ch == TY_RETURN){
 			vgaputc(devptr,TY_NEWLINE);
+			kbdcb.tyibuff[kbdcb.tyicursor] = '\n';
+			kbdcb.tyicursor++;
 		}
 		else{
 			vgaputc(devptr,ch);
+			kbdcb.tyibuff[kbdcb.tyicursor] = ch;
+			kbdcb.tyicursor++;
 		}
 	}
+	signal(kbdcb.tyisem);
 }
 

@@ -41,4 +41,3 @@ kbdgetc(struct dentry *devptr)
 
   return c;
 }
-

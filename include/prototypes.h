@@ -464,7 +464,10 @@ extern	void	xdone(void);
 extern	syscall	yield(void);
 
 extern devcall kbdgetc(struct dentry *devptr);
+extern devcall kbdinch(struct dentry *devptr);
 extern devcall vgaputc(struct dentry *devptr, char ch);
+extern devcall kbdread(struct dentry *devptr,char* buff,int32 count);
+extern devcall vgawrite(struct dentry *devptr,char* buff,int32	count);
 extern devcall kbdvgainit(void);
 extern interrupt kbddisp(void);
 extern void kbdhandler(void);

@@ -112,9 +112,23 @@ static uint8 ctlmap[256] =
   [0xD2] KEY_INS,   [0xD3] KEY_DEL
 };
 
+struct kbdcblk {
+  char *tyihead;
+  char *tyitail;
+  char tyibuff[TY_IBUFLEN];
+  char last_c;
+  sid32 tyisem;
+  int32 tyicursor;
+};
+struct kbdcblk kbdcb;
+extern struct kbdcblk kbdcb;
+
 
 extern devcall kbdgetc(struct dentry *devptr);
+extern devcall kbdinch(struct dentry *devptr);
 extern devcall vgaputc(struct dentry *devptr, char ch);
+extern devcall kbdread(struct dentry *devptr,char* buff,int32 count);
+extern devcall vgawrite(struct dentry *devptr,char* buff,int32	count);
 extern devcall kbdvgainit(void);
 extern interrupt kbddisp(void);
 extern void kbdhandler(void);
