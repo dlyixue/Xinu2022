@@ -48,6 +48,13 @@ devcall vgaputc(struct dentry *devptr, char ch){
 	if(ch == TY_NEWLINE){
 		pos += width - pos%width;
 	}
+	else if(ch == '\t'){
+		for(int i = 0; i< 4;i++){
+			uint16 *addr = get_addr1(pos);
+			putc_vga(addr,' ');
+			pos++;
+		}
+	}
 	else{
 		uint16 *addr = get_addr1(pos);
 		putc_vga(addr,ch);
@@ -86,6 +93,13 @@ void kbdhandler(void) {
 			vgaputc(devptr,TY_NEWLINE);
 			kbdcb.tyibuff[kbdcb.tyicursor] = '\n';
 			kbdcb.tyicursor++;
+		}
+		else if(ch == '\t'){
+			for(int i = 0; i< 4;i++){
+				vgaputc(devptr,' ');
+				kbdcb.tyibuff[kbdcb.tyicursor] = ' ';
+				kbdcb.tyicursor++;
+			}
 		}
 		else{
 			vgaputc(devptr,ch);
