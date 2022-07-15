@@ -32,8 +32,8 @@ shellcmd xsh_test(int nargs, char *args[])
 	syscall_printf("abcdefghigklmn\n");
 	syscall_printf("!@#@!$!EWFQASGGQQWEWQ\n");
 	syscall_printf("abc\ndefg\thig\nklm\tn\n");
-	syscall_printf("size = 27\n");
-	syscall_printf("aaaaaaaaaaaaaaaaaaaaaaaaa\n");
+	syscall_printf("size = 121\n");
+	syscall_printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
 	for(int i = 0;i <7 ;i++){
 		syscall_printf("%d \n",i);
 	}
