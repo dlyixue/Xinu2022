@@ -1,0 +1,3 @@
+/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/rebuild_cache.dir
+/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/edit_cache.dir
+/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/hello.elf.dir

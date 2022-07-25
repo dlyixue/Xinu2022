@@ -1,0 +1,1 @@
+/usr/bin/gcc -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type  -Wl,-T/home/dlyixue/Xinu-disk/barebone-hello/hello.ld,-melf_i386,-dn CMakeFiles/hello.elf.dir/hello.c.o  -o hello.elf 

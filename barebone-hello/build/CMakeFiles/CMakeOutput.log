@@ -1,0 +1,416 @@
+The target system is: Linux -  - i386
+The host system is: Linux - 5.15.0-41-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: -march=i686;-m32;-mgeneral-regs-only;-fexceptions;-ffreestanding;-fno-stack-protector;-mno-red-zone;-nostdlib;-Wno-builtin-declaration-mismatch;-Werror=return-type
+Id flags:  
+
+The output was:
+0
+/usr/bin/ld: 警告: 无法找到项目符号 _start; 缺省为 0000000000001000
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/3.16.3/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/g++ 
+Build flags: -march=i686;-m32;-mgeneral-regs-only;-fexceptions;-ffreestanding;-fno-stack-protector;-mno-red-zone;-nostdlib;-Wno-builtin-declaration-mismatch;-Werror=return-type
+Id flags:  
+
+The output was:
+0
+/usr/bin/ld: 警告: 无法找到项目符号 _start; 缺省为 0000000000001000
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/3.16.3/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1c544/fast && /usr/bin/make -f CMakeFiles/cmTC_1c544.dir/build.make CMakeFiles/cmTC_1c544.dir/build
+make[1]: 进入目录“/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_1c544.dir/testCCompiler.c.o
+/usr/bin/gcc   -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -o CMakeFiles/cmTC_1c544.dir/testCCompiler.c.o   -c /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_1c544
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1c544.dir/link.txt --verbose=1
+/usr/bin/gcc -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type     CMakeFiles/cmTC_1c544.dir/testCCompiler.c.o  -o cmTC_1c544 
+/usr/bin/ld: 警告: 无法找到项目符号 _start; 缺省为 0000000000001000
+make[1]: 离开目录“/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp”
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d69e1/fast && /usr/bin/make -f CMakeFiles/cmTC_d69e1.dir/build.make CMakeFiles/cmTC_d69e1.dir/build
+make[1]: Entering directory '/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc   -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v -o CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) 
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o' '-c'
+ /usr/lib/gcc/x86_64-linux-gnu/9/cc1 -quiet -v -imultilib 32 -imultiarch i386-linux-gnu /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -march=i686 -m32 -mgeneral-regs-only -mno-red-zone -auxbase-strip CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o -Wno-builtin-declaration-mismatch -Werror=return-type -version -fexceptions -ffreestanding -fno-stack-protector -fasynchronous-unwind-tables -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccPVE3An.s
+GNU C17 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)
+	compiled by GNU C version 9.4.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/i386-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"
+ignoring nonexistent directory "/usr/include/i386-linux-gnu"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/x86_64-linux-gnu/9/include
+ /usr/local/include
+ /usr/include
+End of search list.
+GNU C17 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)
+	compiled by GNU C version 9.4.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: c0c95c0b4209efec1c1892d5ff24030b
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o' '-c'
+ as -v --32 -o CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o /tmp/ccPVE3An.s
+GNU assembler version 2.34 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.34
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o' '-c'
+Linking C executable cmTC_d69e1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d69e1.dir/link.txt --verbose=1
+/usr/bin/gcc -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o  -o cmTC_d69e1 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'cmTC_d69e1'
+ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccCbPXFO.res --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -dynamic-linker /lib/ld-linux.so.2 -pie -z now -z relro -o cmTC_d69e1 -L/usr/lib/gcc/x86_64-linux-gnu/9/32 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32 -L/lib/../lib32 -L/usr/lib/../lib32 -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o
+/usr/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000001000
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'cmTC_d69e1'
+make[1]: Leaving directory '/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+    add: [/usr/local/include]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/9/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/gcc/x86_64-linux-gnu/9/include;/usr/local/include;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_d69e1/fast && /usr/bin/make -f CMakeFiles/cmTC_d69e1.dir/build.make CMakeFiles/cmTC_d69e1.dir/build]
+  ignore line: [make[1]: Entering directory '/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc   -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v -o CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o' '-c']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/cc1 -quiet -v -imultilib 32 -imultiarch i386-linux-gnu /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -march=i686 -m32 -mgeneral-regs-only -mno-red-zone -auxbase-strip CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o -Wno-builtin-declaration-mismatch -Werror=return-type -version -fexceptions -ffreestanding -fno-stack-protector -fasynchronous-unwind-tables -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccPVE3An.s]
+  ignore line: [GNU C17 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/i386-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"]
+  ignore line: [ignoring nonexistent directory "/usr/include/i386-linux-gnu"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C17 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: c0c95c0b4209efec1c1892d5ff24030b]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o' '-c']
+  ignore line: [ as -v --32 -o CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o /tmp/ccPVE3An.s]
+  ignore line: [GNU assembler version 2.34 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.34]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o' '-c']
+  ignore line: [Linking C executable cmTC_d69e1]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d69e1.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o  -o cmTC_d69e1 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'cmTC_d69e1']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccCbPXFO.res --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -dynamic-linker /lib/ld-linux.so.2 -pie -z now -z relro -o cmTC_d69e1 -L/usr/lib/gcc/x86_64-linux-gnu/9/32 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32 -L/lib/../lib32 -L/usr/lib/../lib32 -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccCbPXFO.res] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_d69e1] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/32] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/32]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32]
+    arg [-L/lib/../lib32] ==> dir [/lib/../lib32]
+    arg [-L/usr/lib/../lib32] ==> dir [/usr/lib/../lib32]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..]
+    arg [CMakeFiles/cmTC_d69e1.dir/CMakeCCompilerABI.c.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/32] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/32]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32] ==> [/usr/lib32]
+  collapse library dir [/lib/../lib32] ==> [/lib32]
+  collapse library dir [/usr/lib/../lib32] ==> [/usr/lib32]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9] ==> [/usr/lib/gcc/x86_64-linux-gnu/9]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> [/usr/lib]
+  implicit libs: []
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/9/32;/usr/lib32;/lib32;/usr/lib/gcc/x86_64-linux-gnu/9;/usr/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5b823/fast && /usr/bin/make -f CMakeFiles/cmTC_5b823.dir/build.make CMakeFiles/cmTC_5b823.dir/build
+make[1]: 进入目录“/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_5b823.dir/testCXXCompiler.cxx.o
+/usr/bin/g++    -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -o CMakeFiles/cmTC_5b823.dir/testCXXCompiler.cxx.o -c /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_5b823
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5b823.dir/link.txt --verbose=1
+/usr/bin/g++  -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type     CMakeFiles/cmTC_5b823.dir/testCXXCompiler.cxx.o  -o cmTC_5b823 
+/usr/bin/ld: 警告: 无法找到项目符号 _start; 缺省为 0000000000001000
+make[1]: 离开目录“/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp”
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e249e/fast && /usr/bin/make -f CMakeFiles/cmTC_e249e.dir/build.make CMakeFiles/cmTC_e249e.dir/build
+make[1]: Entering directory '/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/g++    -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v -o CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=/usr/bin/g++
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) 
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
+ /usr/lib/gcc/x86_64-linux-gnu/9/cc1plus -quiet -v -imultilib 32 -imultiarch i386-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -march=i686 -m32 -mgeneral-regs-only -mno-red-zone -auxbase-strip CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o -Wno-builtin-declaration-mismatch -Werror=return-type -version -fexceptions -ffreestanding -fno-stack-protector -fasynchronous-unwind-tables -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccEtWnPC.s
+GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)
+	compiled by GNU C version 9.4.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/32"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/i386-linux-gnu/c++/9"
+ignoring nonexistent directory "/usr/local/include/i386-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"
+ignoring nonexistent directory "/usr/include/i386-linux-gnu"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/include/c++/9
+ /usr/include/c++/9/backward
+ /usr/lib/gcc/x86_64-linux-gnu/9/include
+ /usr/local/include
+ /usr/include
+End of search list.
+GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)
+	compiled by GNU C version 9.4.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 65fe925b83d3956b533de4aaba7dace0
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
+ as -v --32 -o CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccEtWnPC.s
+GNU assembler version 2.34 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.34
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
+Linking CXX executable cmTC_e249e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e249e.dir/link.txt --verbose=1
+/usr/bin/g++  -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_e249e 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/g++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'cmTC_e249e' '-shared-libgcc'
+ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWS4les.res --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -dynamic-linker /lib/ld-linux.so.2 -pie -z now -z relro -o cmTC_e249e -L/usr/lib/gcc/x86_64-linux-gnu/9/32 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32 -L/lib/../lib32 -L/usr/lib/../lib32 -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000001000
+COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'cmTC_e249e' '-shared-libgcc'
+make[1]: Leaving directory '/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/include/c++/9]
+    add: [/usr/include/c++/9/backward]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+    add: [/usr/local/include]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/include/c++/9] ==> [/usr/include/c++/9]
+  collapse include dir [/usr/include/c++/9/backward] ==> [/usr/include/c++/9/backward]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/9/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/include/c++/9;/usr/include/c++/9/backward;/usr/lib/gcc/x86_64-linux-gnu/9/include;/usr/local/include;/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_e249e/fast && /usr/bin/make -f CMakeFiles/cmTC_e249e.dir/build.make CMakeFiles/cmTC_e249e.dir/build]
+  ignore line: [make[1]: Entering directory '/home/dlyixue/Xinu-disk/barebone-hello/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/g++    -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v -o CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/g++]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/cc1plus -quiet -v -imultilib 32 -imultiarch i386-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -march=i686 -m32 -mgeneral-regs-only -mno-red-zone -auxbase-strip CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o -Wno-builtin-declaration-mismatch -Werror=return-type -version -fexceptions -ffreestanding -fno-stack-protector -fasynchronous-unwind-tables -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccEtWnPC.s]
+  ignore line: [GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/32"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/i386-linux-gnu/c++/9"]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/i386-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"]
+  ignore line: [ignoring nonexistent directory "/usr/include/i386-linux-gnu"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/include/c++/9]
+  ignore line: [ /usr/include/c++/9/backward]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.1) version 9.4.0 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 65fe925b83d3956b533de4aaba7dace0]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
+  ignore line: [ as -v --32 -o CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccEtWnPC.s]
+  ignore line: [GNU assembler version 2.34 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.34]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
+  ignore line: [Linking CXX executable cmTC_e249e]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e249e.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/g++  -march=i686 -m32 -mgeneral-regs-only -fexceptions -ffreestanding -fno-stack-protector -mno-red-zone -nostdlib -Wno-builtin-declaration-mismatch -Werror=return-type    -v CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_e249e ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.1' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-9-Av3uEd/gcc-9-9.4.0/debian/tmp-nvptx/usr hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/32/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32/:/lib/../lib32/:/usr/lib/../lib32/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=i686' '-m32' '-mgeneral-regs-only' '-fexceptions' '-ffreestanding' '-fno-stack-protector' '-mno-red-zone' '-nostdlib' '-Wno-builtin-declaration-mismatch' '-Werror=return-type' '-v' '-o' 'cmTC_e249e' '-shared-libgcc']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWS4les.res --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -dynamic-linker /lib/ld-linux.so.2 -pie -z now -z relro -o cmTC_e249e -L/usr/lib/gcc/x86_64-linux-gnu/9/32 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32 -L/lib/../lib32 -L/usr/lib/../lib32 -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccWS4les.res] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_e249e] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/32] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/32]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32]
+    arg [-L/lib/../lib32] ==> dir [/lib/../lib32]
+    arg [-L/usr/lib/../lib32] ==> dir [/usr/lib/../lib32]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..]
+    arg [CMakeFiles/cmTC_e249e.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/32] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/32]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib32] ==> [/usr/lib32]
+  collapse library dir [/lib/../lib32] ==> [/lib32]
+  collapse library dir [/usr/lib/../lib32] ==> [/usr/lib32]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9] ==> [/usr/lib/gcc/x86_64-linux-gnu/9]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> [/usr/lib]
+  implicit libs: []
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/9/32;/usr/lib32;/lib32;/usr/lib/gcc/x86_64-linux-gnu/9;/usr/lib]
+  implicit fwks: []
+
+
